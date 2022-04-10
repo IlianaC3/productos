@@ -26,13 +26,13 @@ app.get('/productos',(req, res, next) =>{
     
 });
 
-app.get('/productoRandom/:id',(req, res, next) => {
-    let id = req.params.id;
+app.get('/productoRandom/',(req, res, next) => {
+    let id = Math.floor(Math.random() * (4 + 1));
     Producto.productoRandom(id).then(result => {
         if (result !== undefined) {
             if (result === null) {
                 res.status(404).json({
-                    message: `No existe el producto`,
+                    message: `No existe el producto para el id ${id}`,
                 });
             } else {
                 res.status(200).json({
